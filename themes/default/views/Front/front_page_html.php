@@ -31,13 +31,70 @@
  */
 		print $this->render("Front/featured_set_slideshow_html.php");
 ?>
+
+<div class="home-page">
+
+	<div class="home-background"></div>
+
 	<div class="row">
-		<div class="col-sm-8">
-			<H1>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vulputate, orci quis vehicula eleifend, metus elit laoreet elit.</H1>
-		</div><!--end col-sm-8-->
-		<div class="col-sm-4">
-<?php
-		print $this->render("Front/gallery_set_links_html.php");
-?>
-		</div> <!--end col-sm-4-->	
+		<div class="col-md-2"></div>			
+		<div class="col-md-10">
+			<div class="home-content" >
+				<div class="home-title">
+                    <a href="#" class="home-button" onclick="caMediaPanel.showPanel('<?= caNavUrl($this->request, '', 'LoginReg', 'RegisterForm', array()); ?>'); return false;">إنشاء حساب</a>
+					<h1>ذاكرة فلسطين</h1>
+				</div>
+				<p> ذاكرة فلسطين هي أرشيف رقمي يهدف إلى توثيق وحفظ الأحداث التاريخية والشهادات الشخصية والمصادر المختلفة المتعلقة بالقضية الفلسطينية. يتيح هذا الأرشيف الوصول إلى وثائق، صور، مقاطع فيديو، وتسجيلات صوتية تسلط الضوء على تاريخ فلسطين وتراثها الثقافي. يوفر النظام أدوات بحث متقدمة وتصنيفات منظمة لتسهيل استكشاف المحتوى، مما يجعله مرجعًا هامًا للباحثين، الطلاب، والمؤرخين المهتمين بتوثيق الرواية الفلسطينية وحفظها للأجيال القادمة.</p>			
+			</div>
+		</div> <!--end col-sm-8-->		
 	</div><!-- end row -->
+</div>
+
+			
+			<!-- Archive content section -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 archive-section">
+            <h2>محتوى الأرشيف</h2>
+            <p class="subtitle">توثيق ورصد المعلومات للأجيال القادمة</p>
+            
+            <!-- Archive categories -->
+            <div class="archive-categories">
+                <div class="row">
+                    <div class="col-sm-2 col-xs-6">
+                        <a href="#" class="category-item">الانتهاكات الإنسانية</a>
+                    </div>
+                    <div class="col-sm-2 col-xs-6">
+                        <a href="#" class="category-item">تدمير البنية التحتية</a>
+                    </div>
+                    <div class="col-sm-2 col-xs-6">
+                        <a href="#" class="category-item">المساجد</a>
+                    </div>
+                    <div class="col-sm-2 col-xs-6">
+                        <a href="#" class="category-item">المدارس</a>
+                    </div>
+                    <div class="col-sm-2 col-xs-6">
+                        <a href="#" class="category-item">المستشفيات</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2 col-xs-6">
+                        <a href="#" class="category-item">الانتهاكات الإنسانية</a>
+                    </div>
+                    <div class="col-sm-2 col-xs-6">
+                        <a href="#" class="category-item">تدمير البنية التحتية</a>
+                    </div>
+                    <div class="col-sm-2 col-xs-6">
+                        <a href="#" class="category-item">المساجد</a>
+                    </div>
+                    <div class="col-sm-2 col-xs-6">
+                        <a href="#" class="category-item">المدارس</a>
+                    </div>
+                    <div class="col-sm-2 col-xs-6">
+                        <a href="#" class="category-item">المستشفيات</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
