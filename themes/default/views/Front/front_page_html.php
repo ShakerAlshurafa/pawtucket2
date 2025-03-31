@@ -41,8 +41,13 @@
 		<div class="col-md-10">
 			<div class="home-content" >
 				<div class="home-title">
-                    <a href="#" class="home-button" onclick="caMediaPanel.showPanel('<?= caNavUrl($this->request, '', 'LoginReg', 'RegisterForm', array()); ?>'); return false;">إنشاء حساب</a>
-					<h1>ذاكرة فلسطين</h1>
+                    <?php if (!$this->request->isLoggedIn()): ?>
+                        <a href="#" class="home-button" onclick="caMediaPanel.showPanel('<?= caNavUrl($this->request, '', 'LoginReg', 'RegisterForm', array()); ?>'); return false;">إنشاء حساب</a>
+                    <?php else: ?>
+                        <!-- edit path -->
+                        <a href="#" class="home-button" onclick="caMediaPanel.showPanel('<?= caNavUrl($this->request, '', 'LoginReg', 'RegisterForm', array()); ?>'); return false;">اذهب للارشيف</a> 
+                    <?php endif; ?>
+                    <h1>ذاكرة فلسطين</h1>
 				</div>
 				<p> ذاكرة فلسطين هي أرشيف رقمي يهدف إلى توثيق وحفظ الأحداث التاريخية والشهادات الشخصية والمصادر المختلفة المتعلقة بالقضية الفلسطينية. يتيح هذا الأرشيف الوصول إلى وثائق، صور، مقاطع فيديو، وتسجيلات صوتية تسلط الضوء على تاريخ فلسطين وتراثها الثقافي. يوفر النظام أدوات بحث متقدمة وتصنيفات منظمة لتسهيل استكشاف المحتوى، مما يجعله مرجعًا هامًا للباحثين، الطلاب، والمؤرخين المهتمين بتوثيق الرواية الفلسطينية وحفظها للأجيال القادمة.</p>			
 			</div>
@@ -52,49 +57,103 @@
 
 			
 			<!-- Archive content section -->
-<div class="container">
+            <div class="container">
     <div class="row">
         <div class="col-sm-12 archive-section">
             <h2>محتوى الأرشيف</h2>
             <p class="subtitle">توثيق ورصد المعلومات للأجيال القادمة</p>
-            
-            <!-- Archive categories -->
+
+            <?php
+                // Archive categories from database
+                $categories = [
+                    ['name' => 'الانتهاكات الإنسانية', 'id' => 1],
+                    ['name' => 'تدمير البنية التحتية', 'id' => 2],
+                    ['name' => 'المساجد', 'id' => 3],
+                    ['name' => 'المدارس', 'id' => 4],
+                    ['name' => 'المستشفيات', 'id' => 5],
+                    ['name' => 'ضحايا المدنيين', 'id' => 6],
+                    ['name' => 'تدمير المنازل', 'id' => 7],
+                    ['name' => 'الآثار التاريخية', 'id' => 8],
+                    ['name' => 'المرافق العامة', 'id' => 9],
+                    ['name' => 'الجرائم الحربية', 'id' => 10]
+                ];
+
+                // Check if user is logged in
+                $isLoggedIn = method_exists($this->request, 'isLoggedIn') ? $this->request->isLoggedIn() : false;
+            ?>
+
+            <!-- Category Grid -->
             <div class="archive-categories">
                 <div class="row">
-                    <div class="col-sm-2 col-xs-6">
-                        <a href="#" class="category-item">الانتهاكات الإنسانية</a>
-                    </div>
-                    <div class="col-sm-2 col-xs-6">
-                        <a href="#" class="category-item">تدمير البنية التحتية</a>
-                    </div>
-                    <div class="col-sm-2 col-xs-6">
-                        <a href="#" class="category-item">المساجد</a>
-                    </div>
-                    <div class="col-sm-2 col-xs-6">
-                        <a href="#" class="category-item">المدارس</a>
-                    </div>
-                    <div class="col-sm-2 col-xs-6">
-                        <a href="#" class="category-item">المستشفيات</a>
-                    </div>
+                    <?php foreach ($categories as $category): ?>
+                        <div class="col-sm-2 col-6 mb-4">
+                            <div class="category-card text-center">
+                                <?php if ($isLoggedIn): ?>
+                                    <a href="/category/<?= htmlspecialchars($category['id']) ?>" class="category-item">
+                                        <div class="category-name"><?= htmlspecialchars($category['name']) ?></div>
+                                    </a>
+                                <?php else: ?>
+                                    <div class="category-link require-login" 
+                                        data-category="<?= htmlspecialchars($category['name']) ?>"
+                                        data-loginurl="<?= caNavUrl($this->request, '', 'LoginReg', 'LoginForm', []) ?>">
+                                        <div class="category-name"><?= htmlspecialchars($category['name']) ?></div>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
-                <div class="row">
-                    <div class="col-sm-2 col-xs-6">
-                        <a href="#" class="category-item">الانتهاكات الإنسانية</a>
-                    </div>
-                    <div class="col-sm-2 col-xs-6">
-                        <a href="#" class="category-item">تدمير البنية التحتية</a>
-                    </div>
-                    <div class="col-sm-2 col-xs-6">
-                        <a href="#" class="category-item">المساجد</a>
-                    </div>
-                    <div class="col-sm-2 col-xs-6">
-                        <a href="#" class="category-item">المدارس</a>
-                    </div>
-                    <div class="col-sm-2 col-xs-6">
-                        <a href="#" class="category-item">المستشفيات</a>
+            </div>
+
+            <!-- Login Modal -->
+            <div class="modal fade" id="loginRequiredModal" tabindex="-1" role="dialog" aria-labelledby="loginRequiredModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header bg-warning text-white">
+                            <h5 class="modal-title" id="loginRequiredModalLabel">تسجيل الدخول مطلوب</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body text-center">
+                            <i class="fas fa-lock fa-4x mb-3 text-warning"></i>
+                            <p class="lead">عذراً، يجب عليك تسجيل الدخول لعرض محتوى <strong id="categoryNamePlaceholder"></strong></p>
+                            <p>بعد تسجيل الدخول سوف تتمكن من مشاهدة جميع المحتويات المتاحة.</p>
+                        </div>
+                        <div class="modal-footer justify-content-center">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">إلغاء</button>
+                            <a href="#" id="loginRedirectBtn" class="btn btn-warning text-white">
+                                <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
+
+<script>
+$(document).ready(function() {   
+    $('.require-login').click(function(event) {
+        event.preventDefault(); 
+
+        var categoryName = $(this).data('category');
+        var loginUrl = $(this).data('loginurl');
+
+        console.log("Category clicked:", categoryName);
+        console.log("Login URL:", loginUrl);
+
+        // Update modal content
+        $('#categoryNamePlaceholder').text(categoryName);
+        $('#loginRedirectBtn').attr('href', loginUrl);
+
+        // Show the Bootstrap modal
+        $('#loginRequiredModal').modal('show');
+    });
+});
+
+
+</script>
+
