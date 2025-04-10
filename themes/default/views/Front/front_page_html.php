@@ -29,42 +29,86 @@
  *
  * ----------------------------------------------------------------------
  */
-		print $this->render("Front/featured_set_slideshow_html.php");
+		// print $this->render("Front/featured_set_slideshow_html.php");
 ?>
 
+<!-- Archive home page section 1 -->
 <div class="home-page">
+    <!-- Background Carousel -->
+    <div id="carouselBackground" class="carousel slide carousel-fade home-background-carousel" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <!-- Reduced number of slides for better performance -->
+            <div class="carousel-item active">
+                <img src="/pawtucket2/themes/default/assets/pawtucket/graphics/home-page.jpg" class="d-block w-100 carousel-img" alt="Palestinian Memory Archive">
+            </div>
+            <div class="carousel-item">
+                <img src="/pawtucket2/themes/default/assets/pawtucket/graphics/univ3.jpg" class="d-block w-100 carousel-img" alt="Historical Documents">
+            </div>
+            <div class="carousel-item">
+                <img src="/pawtucket2/themes/default/assets/pawtucket/graphics/lib8.jpg" class="d-block w-100 carousel-img" alt="Cultural Heritage">
+            </div>
+            <div class="carousel-item">
+                <img src="/pawtucket2/themes/default/assets/pawtucket/graphics/lib1.jpg" class="d-block w-100 carousel-img" alt="Archival Materials">
+            </div>
+        </div>
+    </div>
 
-	<div class="home-background"></div>
-
-	<div class="row">
-		<div class="col-md-2"></div>			
-		<div class="col-md-10">
-			<div class="home-content" >
-				<div class="home-title">
-                    <?php if (!$this->request->isLoggedIn()): ?>
-                        <a href="#" class="home-button" onclick="caMediaPanel.showPanel('<?= caNavUrl($this->request, '', 'LoginReg', 'RegisterForm', array()); ?>'); return false;">إنشاء حساب</a>
-                    <?php else: ?>
-                        <!-- edit path -->
-                        <a href="#" class="home-button" onclick="caMediaPanel.showPanel('<?= caNavUrl($this->request, '', 'LoginReg', 'RegisterForm', array()); ?>'); return false;">اذهب للارشيف</a> 
-                    <?php endif; ?>
-                    <h1>ذاكرة فلسطين</h1>
-				</div>
-				<p> ذاكرة فلسطين هي أرشيف رقمي يهدف إلى توثيق وحفظ الأحداث التاريخية والشهادات الشخصية والمصادر المختلفة المتعلقة بالقضية الفلسطينية. يتيح هذا الأرشيف الوصول إلى وثائق، صور، مقاطع فيديو، وتسجيلات صوتية تسلط الضوء على تاريخ فلسطين وتراثها الثقافي. يوفر النظام أدوات بحث متقدمة وتصنيفات منظمة لتسهيل استكشاف المحتوى، مما يجعله مرجعًا هامًا للباحثين، الطلاب، والمؤرخين المهتمين بتوثيق الرواية الفلسطينية وحفظها للأجيال القادمة.</p>			
-			</div>
-		</div> <!--end col-sm-8-->		
-	</div><!-- end row -->
+    <!-- Main Content -->
+    <div class="container-fluid">
+        <div class="row justify-content-end">
+            <div class="col-lg-8 col-xl-6">
+                <div class="home-content">
+                    <div class="home-header">
+                    <div class="title-container">
+                            <h1 class="home-title">ذاكرة فلسطين</h1>
+                        </div>
+                        <?php if (!$this->request->isLoggedIn()): ?>
+                            <a href="#" class="home-button" onclick="caMediaPanel.showPanel('<?= caNavUrl($this->request, '', 'LoginReg', 'RegisterForm', array()); ?>'); return false;">
+                                إنشاء حساب
+                                <i class="fas fa-user-plus ms-2"></i>
+                            </a>
+                        <?php else: ?>
+                            <a href="<?= caNavUrl($this->request, '', 'Browse', 'collections', []); ?>" class="home-button">
+                                اذهب للأرشيف
+                                <i class="fas fa-archive ms-2"></i>
+                            </a>
+                        <?php endif; ?>
+                    </div>
+                    <div class="home-description">
+                        <p>ذاكرة فلسطين هي أرشيف رقمي يهدف إلى توثيق وحفظ الأحداث التاريخية والشهادات الشخصية والمصادر المختلفة المتعلقة بالقضية الفلسطينية. يتيح هذا الأرشيف الوصول إلى وثائق، صور، مقاطع فيديو، وتسجيلات صوتية تسلط الضوء على تاريخ فلسطين وتراثها الثقافي.</p>
+                        <div class="search-box">
+                            <form action="<?= caNavUrl($this->request, '', 'Search', 'Index'); ?>">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="ابحث في الأرشيف..." aria-label="Search">
+                                    <button class="btn btn-search" type="submit">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator">
+        <span></span>
+    </div>
 </div>
 
 			
-			<!-- Archive content section -->
-            <div class="container">
+<!-- Archive content section -->
+<div class="container">
     <div class="row">
         <div class="col-sm-12 archive-section">
             <h2>محتوى الأرشيف</h2>
             <p class="subtitle">توثيق ورصد المعلومات للأجيال القادمة</p>
 
+            <!-- Archive categories -->
             <?php
-                // Archive categories from database
+                // From database
                 $categories = [
                     ['name' => 'الانتهاكات الإنسانية', 'id' => 1],
                     ['name' => 'تدمير البنية التحتية', 'id' => 2],
@@ -79,81 +123,32 @@
                 ];
 
                 // Check if user is logged in
-                $isLoggedIn = method_exists($this->request, 'isLoggedIn') ? $this->request->isLoggedIn() : false;
+                $isLoggedIn = $this->request->isLoggedIn();
             ?>
 
             <!-- Category Grid -->
             <div class="archive-categories">
                 <div class="row">
                     <?php foreach ($categories as $category): ?>
-                        <div class="col-sm-2 col-6 mb-4">
-                            <div class="category-card text-center">
-                                <?php if ($isLoggedIn): ?>
-                                    <a href="/category/<?= htmlspecialchars($category['id']) ?>" class="category-item">
-                                        <div class="category-name"><?= htmlspecialchars($category['name']) ?></div>
-                                    </a>
-                                <?php else: ?>
-                                    <div class="category-link require-login" 
-                                        data-category="<?= htmlspecialchars($category['name']) ?>"
-                                        data-loginurl="<?= caNavUrl($this->request, '', 'LoginReg', 'LoginForm', []) ?>">
-                                        <div class="category-name"><?= htmlspecialchars($category['name']) ?></div>
+                        <div class="col-sm-2 col-xs-6 mb-4">
+                            <?php if ($isLoggedIn): ?>
+                                <a href="/Collections/Index/<?= $category['id'] ?>" class="category-item">
+                                    <div class="category-card text-center">
+                                        <div class="category-name"><?= $category['name'] ?></div>
                                     </div>
-                                <?php endif; ?>
-                            </div>
+                                </a>
+                            <?php else: ?>
+                                <div class="category-card text-center require-login" 
+                                    data-category="<?= $category['name'] ?>"
+                                    data-loginurl="<?= caNavUrl($this->request, '', 'LoginReg', 'LoginForm', []) ?>">
+                                    <div class="category-name"><?= $category['name'] ?></div>
+                                </div>
+                            <?php endif; ?>
                         </div>
                     <?php endforeach; ?>
                 </div>
             </div>
-
-            <!-- Login Modal -->
-            <div class="modal fade" id="loginRequiredModal" tabindex="-1" role="dialog" aria-labelledby="loginRequiredModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header bg-warning text-white">
-                            <h5 class="modal-title" id="loginRequiredModalLabel">تسجيل الدخول مطلوب</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body text-center">
-                            <i class="fas fa-lock fa-4x mb-3 text-warning"></i>
-                            <p class="lead">عذراً، يجب عليك تسجيل الدخول لعرض محتوى <strong id="categoryNamePlaceholder"></strong></p>
-                            <p>بعد تسجيل الدخول سوف تتمكن من مشاهدة جميع المحتويات المتاحة.</p>
-                        </div>
-                        <div class="modal-footer justify-content-center">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">إلغاء</button>
-                            <a href="#" id="loginRedirectBtn" class="btn btn-warning text-white">
-                                <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
 </div>
-
-<script>
-$(document).ready(function() {   
-    $('.require-login').click(function(event) {
-        event.preventDefault(); 
-
-        var categoryName = $(this).data('category');
-        var loginUrl = $(this).data('loginurl');
-
-        console.log("Category clicked:", categoryName);
-        console.log("Login URL:", loginUrl);
-
-        // Update modal content
-        $('#categoryNamePlaceholder').text(categoryName);
-        $('#loginRedirectBtn').attr('href', loginUrl);
-
-        // Show the Bootstrap modal
-        $('#loginRequiredModal').modal('show');
-    });
-});
-
-
-</script>
 
