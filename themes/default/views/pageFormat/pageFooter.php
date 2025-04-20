@@ -20,12 +20,15 @@
             <!-- Center Section - University Logo & Name -->
             <div class="footer-section text-center">
                 <img src="<?= __CA_URL_ROOT__ ?>/themes/default/assets/pawtucket/graphics/logos/aaup_logo.svg" alt="AAUP Logo" class="logo-img">
-                <p class="university-name">الجامعة العربية الامريكية</p>
+                <div class="university-title">
+                    <div class="ar">الجامعة العربية الأمريكية</div>
+                    <div class="en">ARAB AMERICAN UNIVERSITY</div>
+                </div>
             </div>
 
             <!-- Right Section - Contact Info -->
-            <div class="footer-section contact-info">
-                <a href="mailto:infa@aaup.edu" class="contact-link">
+            <div class="footer-section contact-info  d-flex justify-content-center align-items-center">
+                <a href="mailto:infa@aaup.edu" class="contact-link" >
                     <svg xmlns="http://www.w3.org/2000/svg" class="contact-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                         <polyline points="22,6 12,13 2,6"></polyline>
@@ -43,6 +46,37 @@
     </div>
 
     <style>
+        .footer{
+            clear: both;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .contact-link{
+            font-size:15px;
+        }
+        .project-name{
+            color:black;
+        }
+        .university-title {
+            text-align: center;
+            font-family: "Tajawal", Arial, sans-serif;
+            line-height: 1.4;
+        }
+
+        .university-title .ar {
+            font-weight: bold;
+            font-size: 16px;
+            color: #000;
+        }
+
+        .university-title .en {
+            font-size: 14px;
+            color: black;
+        }
     </style>
 </footer>
 

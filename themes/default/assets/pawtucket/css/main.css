@@ -10,7 +10,15 @@ html {
     min-height: 100%;
 }
 body {
-	font-family: 'Tajawal', Arial, sans-serif;
+	font-family: 'Tajawal' Arial, sans-serif;
+	overflow-x: hidden;  
+	padding: 0 !important;
+	margin: 0 !important;
+	background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvaAbwGHz8sUsHxEUvSRL-ExyaUTfeW2G93Q&s);
+	background-repeat: no-repeat;
+	background-size: contain;
+	ba
+	
 }
 .navbar {
 	border-bottom: 1px solid #f0f0f0;
@@ -35,7 +43,7 @@ body {
 	pointer-events: none; /* Allows clicking through to elements behind */
 }
 .btn-login {
-	color: #F8B739;
+	color: black;
 	border-color: #F8B739;
 	border-radius: 4px;
 	padding: 6px 20px;

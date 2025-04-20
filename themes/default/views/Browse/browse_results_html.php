@@ -70,8 +70,11 @@
 if (!$vb_ajax) {	// !ajax
 ?>
 
-<div class="row" style="clear:both;">
-	<div class='<?php print ($vs_result_col_class) ? $vs_result_col_class : "col-sm-8 col-md-8 col-lg-8"; ?>'>
+<div class="row" style="clear:both; padding-bottom: 70px; padding-top: 70px; background-image: url(/pawtucket2/themes/default/assets/pawtucket/graphics/univ3.jpg);
+">
+	<div class='<?php print ($vs_result_col_class) ? $vs_result_col_class : "col-sm-8 col-md-12 col-lg-12"; ?>'>
+		<div class="search d-flex justify-content-around  align-items-center">
+		
 
 <?php 
 			if($vs_sort_control_type == 'list'){
@@ -94,9 +97,10 @@ if (!$vb_ajax) {	// !ajax
 				}
 			}
 ?>
-		<H1>
+		<H1 class="text-end" style="margin-right: 100px; color: white">
 <?php
-			print _t('%1 %2 %3', $vn_result_size, ($va_browse_info["labelSingular"]) ? $va_browse_info["labelSingular"] : $t_instance->getProperty('NAME_SINGULAR'), ($vn_result_size == 1) ? _t("Result") : _t("Results"));	
+			// print _t('%1 %2 %3', $vn_result_size, ($va_browse_info["labelSingular"]) ? $va_browse_info["labelSingular"] : $t_instance->getProperty('NAME_SINGULAR'), ($vn_result_size == 1) ? _t("Result") : _t("Results"));	
+			print _t('للبحث السريع');	
 ?>		
 			<div class="btn-group">
 				<a href="#" data-toggle="dropdown"><i class="fa fa-cog bGear" aria-label="Result options"></i></a>
@@ -119,8 +123,8 @@ if (!$vb_ajax) {	// !ajax
 							}
 							print "<li class='divider' role='menuitem'></li>\n";
 							print "<li class='dropdown-header' role='menuitem'>"._t("Sort order:")."</li>\n";
-							print "<li role='menuitem'>".caNavLink($this->request, (($vs_sort_dir == 'asc') ? '<em>' : '')._t("Ascending").(($vs_sort_dir == 'asc') ? '</em>' : ''), '', '*', '*', '*', array('view' => $vs_current_view, 'key' => $vs_browse_key, 'direction' => 'asc', '_advanced' => $vn_is_advanced ? 1 : 0))."</li>";
-							print "<li role='menuitem'>".caNavLink($this->request, (($vs_sort_dir == 'desc') ? '<em>' : '')._t("Descending").(($vs_sort_dir == 'desc') ? '</em>' : ''), '', '*', '*', '*', array('view' => $vs_current_view, 'key' => $vs_browse_key, 'direction' => 'desc', '_advanced' => $vn_is_advanced ? 1 : 0))."</li>";
+							print "<li role='menuitem'>".caNavLink($this->request, (($vs_sort_dir == 'asc') ? '<em>' : '')._t("تصاعدي").(($vs_sort_dir == 'asc') ? '</em>' : ''), '', '*', '*', '*', array('view' => $vs_current_view, 'key' => $vs_browse_key, 'direction' => 'asc', '_advanced' => $vn_is_advanced ? 1 : 0))."</li>";
+							print "<li role='menuitem'>".caNavLink($this->request, (($vs_sort_dir == 'desc') ? '<em>' : '')._t("تنازلي").(($vs_sort_dir == 'desc') ? '</em>' : ''), '', '*', '*', '*', array('view' => $vs_current_view, 'key' => $vs_browse_key, 'direction' => 'desc', '_advanced' => $vn_is_advanced ? 1 : 0))."</li>";
 						}
 						
 						if ((sizeof($va_criteria) > ($vb_is_search ? 1 : 0)) && is_array($va_sorts) && sizeof($va_sorts)) {
@@ -154,7 +158,15 @@ if (!$vb_ajax) {	// !ajax
 			}
 ?>
 		</H1>
-		<div class='bCriteria'>
+
+		<div class='search-container'>
+			<input type='text' class='search-bar text-end' placeholder='.....بحث'>
+		</div>
+
+	</div> <!-- end search div -->
+
+
+	<div class='bCriteria'>
 <?php
 		if (sizeof($va_criteria) > 0) {
 			$i = 0;
