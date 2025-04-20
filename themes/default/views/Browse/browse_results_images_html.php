@@ -144,20 +144,31 @@
 					$vs_expanded_info = $qr_res->getWithTemplate($vs_extended_info_template);
 
 					$vs_result_output = "
-		<div class='bResultItemCol col-xs-{$vn_col_span_xs} col-sm-{$vn_col_span_sm} col-md-{$vn_col_span}'>
-			<div class='bResultItem' id='row{$vn_id}' onmouseover='jQuery(\"#bResultItemExpandedInfo{$vn_id}\").show();'  onmouseout='jQuery(\"#bResultItemExpandedInfo{$vn_id}\").hide();'>
-				<div class='bSetsSelectMultiple'><input type='checkbox' name='object_ids' value='{$vn_id}'></div>
-				<div class='bResultItemContent'><div class='text-center bResultItemImg'>{$vs_rep_detail_link}</div>
-					<div class='bResultItemText'>
-						<small>{$vs_idno_detail_link}</small><br/>{$vs_label_detail_link}
-					</div><!-- end bResultItemText -->
-				</div><!-- end bResultItemContent -->
-				<div class='bResultItemExpandedInfo' id='bResultItemExpandedInfo{$vn_id}'>
-					<hr>
-					{$vs_expanded_info}{$vs_add_to_set_link}
-				</div><!-- bResultItemExpandedInfo -->
-			</div><!-- end bResultItem -->
-		</div><!-- end col -->";
+						<div class='card-grid'>
+							<div class='bResultItemCol col-xs-{$vn_col_span_xs} col-sm-{$vn_col_span_sm} col-md-{$vn_col_span}'>
+								<div class='card' id='row{$vn_id}'
+									onmouseover='jQuery(\"#bResultItemExpandedInfo{$vn_id}\").show();'
+									onmouseout='jQuery(\"#bResultItemExpandedInfo{$vn_id}\").hide();'>
+								
+								<div class=\"card-top\">
+									<div class=\"text-center card-image\">{$vs_rep_detail_link}</div>
+									<div class=\"card-info\">
+									<h2>{$vs_label_detail_link}</h2>
+									<p class=\"meta\"><small>{$vs_idno_detail_link}</small></p>
+									</div>
+								</div>
+
+								<p class=\"description\">{$vs_expanded_info}</p>
+
+								<div class='card-expanded' id='bResultItemExpandedInfo{$vn_id}' style=\"display:none;\">
+									<hr>
+									{$vs_add_to_set_link}
+								</div>
+								</div>
+							</div>
+						</div>";
+
+
 					ExternalCache::save($vs_cache_key, $vs_result_output, 'browse_result', $o_config->get("cache_timeout"));
 					print $vs_result_output;
 				}				

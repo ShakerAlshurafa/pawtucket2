@@ -42,7 +42,7 @@
 	$vn_top_level_collection_id = array_shift($t_item->get('ca_collections.hierarchy.collection_id', array("returnWithStructure" => true)));
 
 ?>
-<div class="row">
+<div class="row vh-100" style=" background-image: url(/pawtucket2/themes/default/assets/pawtucket/graphics/univ3.jpg);">
 	<div class='col-xs-12 navTop'><!--- only shown at small screen size -->
 		{{{previousLink}}}{{{resultsLink}}}{{{nextLink}}}
 	</div><!-- end detailTop -->

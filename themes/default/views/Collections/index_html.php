@@ -3,9 +3,19 @@
 	$qr_collections = $this->getVar("collection_results");
 ?>
 	<div class="row">
-		<div class='col-md-12 col-lg-12 collectionsList'>
-			<h1><?php print $this->getVar("section_name"); ?></h1>
-			<p><?php print $o_collections_config->get("collections_intro_text"); ?></p>
+		<div class='col-md-12 col-lg-12 collectionsList text-center'>
+			<div class="container py-2 categories-header">
+				<div class="row">
+					<div class="col-md-6 categories-header-img">
+						<img src="/pawtucket2/themes/default/assets/pawtucket/graphics/categories-header.webp" class="img-fluid rounded" alt="Archive Image">
+					</div>
+					<div class="col-md-6 categories-header-content d-flex flex-column justify-content-center align-items-center">
+						<h1 class="display-4"><?php print $this->getVar("section_name"); ?></h1>
+						<p class="display-6 mt-5 mx-4"><?php print $o_collections_config->get("collections_intro_text"); ?></p>
+					</div>
+				</div>
+			</div>
+
 <?php	
 	$vn_i = 0;
 	if($qr_collections && $qr_collections->numHits()) {
@@ -26,8 +36,15 @@
 			print "</div><!-- end row -->\n";
 		}
 	} else {
-		print _t('No collections available');
+		print _t('
+			<div class="alert alert-warning text-center py-5 mb-5 d-flex flex-column justify-content-center align-items-center" role="alert">
+				<h4 class="alert-heading display-6 mt-2">لا يوجد بيانات متوفرة بعد</h4>
+				<p class="display-7">نأسف، لم يتم العثور على أي بيانات متاحة في الوقت الحالي.</p>
+			</div>
+		');
 	}
+	
 ?>
 		</div>
 	</div>
+</div>
