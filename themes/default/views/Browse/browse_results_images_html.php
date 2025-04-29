@@ -145,7 +145,7 @@
 
 					$vs_result_output = "
 						<div class='card-grid'>
-							<div class='bResultItemCol col-xs-{$vn_col_span_xs} col-sm-{$vn_col_span_sm} col-md-{$vn_col_span}'>
+							<div class='bResultItemCol col-xs-{$vn_col_span_xs} col-sm-{$vn_col_span_sm} col-md-{$vn_col_span} w-100'>
 								<div class='card' id='row{$vn_id}'
 									onmouseover='jQuery(\"#bResultItemExpandedInfo{$vn_id}\").show();'
 									onmouseout='jQuery(\"#bResultItemExpandedInfo{$vn_id}\").hide();'>
