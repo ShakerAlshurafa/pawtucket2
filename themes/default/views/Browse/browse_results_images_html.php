@@ -151,7 +151,7 @@
 									onmouseout='jQuery(\"#bResultItemExpandedInfo{$vn_id}\").hide();'>
 								
 								<div class=\"card-top\">
-									<div class=\"text-center card-image\">{$vs_rep_detail_link}</div>
+									<div class=\"text-center card-image w-100\">{$vs_rep_detail_link}</div>
 									<div class=\"card-info\">
 									<h2>{$vs_label_detail_link}</h2>
 									<p class=\"meta\"><small>{$vs_idno_detail_link}</small></p>

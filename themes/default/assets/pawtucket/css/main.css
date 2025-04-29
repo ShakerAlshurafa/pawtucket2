@@ -4155,3 +4155,11 @@ div.banContinue {
 .query-builder .rule-container{
 	padding:10px !important;
 }
+
+
+.jscroll-inner{
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
